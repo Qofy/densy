@@ -1,8 +1,142 @@
-.login-section{
+.login-section {
   overflow: hidden;
-  display: fex;
+  display: flex;
   flex-direction: column;
   text-align: center;
   height: 100vh;
-
+  
+  .content {
+    margin-bottom: 10vw;
+    width: 100%;
+    position: relative;
+    min-width: 100vw; /* Fixed: changed from 100vh to 100vw */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 80px 40px;
+    background-image: url("/images/login-background.jpg"); /* Fixed: use public folder path */
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative; /* Added for z-index to work */
+    
+    /* Add overlay if needed */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3); /* Dark overlay for better text readability */
+      z-index: -1;
+    }
+    
+    .densy-logo-1 {
+      margin-bottom: 2vw;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      transition: opacity 0.2s ease-out;
+      width: 100%;
+      position: relative; /* Ensure content is above overlay */
+      z-index: 1;
+      
+      img {
+        margin-bottom: 12px;
+        max-width: 600px; /* Fixed: changed min-width to max-width */
+        width: 100%;
+        height: auto; /* Added for proper aspect ratio */
+        display: block;
+      }
+      
+      a {
+        width: 100%;
+        text-decoration: none;
+        
+        .sign-up {
+          font-weight: bold;
+          color: #ffffff;
+          background-color: #0063e5;
+          margin-bottom: 12px;
+          width: 100%;
+          letter-spacing: 1.5px;
+          font-size: 18px;
+          padding: 16.5px 2rem; /* Fixed: reduced padding for better responsiveness */
+          border: 1px solid transparent;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+          
+          &:hover {
+            background-color: #0483ee;
+          }
+          
+        
+        }
+      }
+      
+      .description {
+        color: hsla(0, 0%, 95.3%, 1);
+        font-size: 11px;
+        margin: 0 0 24px;
+        line-height: 1.5;
+        letter-spacing: 1.5px;
+        text-align: center;
+        max-width: 500px; /* Added for better readability */
+      }
+    }
+  }
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-section .content {
+    padding: 40px 20px;
+    
+    .densy-logo-1 {
+      .cta-logo-1 {
+        max-width: 300px;
+      }
+      
+      a .sign-up {
+        font-size: 16px;
+        padding: 14px 1rem;
+
+        
+      }
+      
+      .description {
+        font-size: 10px;
+      }
+
+      .cta-logo-2{
+        max-width: 600px;
+        margin-bottom: 20px;
+        display: inline-block;
+        vertical-align: bottom;
+        width: 100%;
+      }
+    }
+  }
+}
+
+  /* Responsive padding */
+          @media (min-width: 768px) {
+            .sign-up{
+            padding: 16.5px;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .sign-up{
+            padding: 16.5px 8rem;
+            }
+          }
