@@ -6,10 +6,9 @@
   height: 85vh;
   
   .content {
-    // margin-bottom: 10vw;
     width: 100%;
     position: relative;
-    min-width: 100vh; 
+    min-height: 100vh; // Changed from min-width
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -17,13 +16,11 @@
     flex-direction: column;
     height: 100%;
     padding: 80px 40px;
-    background-image: url("/images/login-background.jpg"); 
+    background-image: url("/images/login-background.jpg");
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
-    position: relative; 
     
-  
     &::before {
       content: '';
       position: absolute;
@@ -31,12 +28,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.3); 
-      z-index: -1;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0; // Changed from -1 to 0
     }
     
     .densy-logo-1 {
-      // margin-bottom: 2vw;
       max-width: 650px;
       display: flex;
       flex-direction: column;
@@ -46,14 +42,14 @@
       margin: 0 auto;
       transition: opacity 0.2s ease-out;
       width: 100%;
-      position: relative; 
+      position: relative;
       z-index: 1;
       
       img {
         margin-bottom: 12px;
         max-width: 600px;
         width: 100%;
-        height: auto; 
+        height: auto;
         display: block;
       }
       
@@ -69,7 +65,7 @@
           width: 100%;
           letter-spacing: 1.5px;
           font-size: 18px;
-          padding: 16.5px 2rem; 
+          padding: 16.5px 2rem;
           border: 1px solid transparent;
           border-radius: 4px;
           cursor: pointer;
@@ -78,8 +74,6 @@
           &:hover {
             background-color: #0483ee;
           }
-          
-        
         }
       }
       
@@ -109,34 +103,24 @@
       a .sign-up {
         font-size: 16px;
         padding: 14px 1rem;
-
-        
       }
       
       .description {
         font-size: 10px;
       }
-
-      .cta-logo-2{
-        max-width: 600px;
-        margin-bottom: 20px;
-        display: inline-block;
-        vertical-align: bottom;
-        width: 100%;
-      }
     }
   }
 }
 
-  /* Responsive padding */
-          @media (min-width: 768px) {
-            .sign-up{
-            padding: 16.5px;
-            }
-          }
-          
-          @media (min-width: 1024px) {
-            .sign-up{
-            padding: 16.5px 8rem;
-            }
-          }
+/* Responsive padding */
+@media (min-width: 768px) {
+  .login-section .content .densy-logo-1 a .sign-up {
+    padding: 16.5px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-section .content .densy-logo-1 a .sign-up {
+    padding: 16.5px 8rem;
+  }
+}
