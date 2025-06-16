@@ -51,6 +51,7 @@ header {
           margin: 0;
           font-size: 0.9rem;
           letter-spacing: 1px;
+          position: relative;
 
         // Hover underline effect
         &::before {
@@ -84,6 +85,48 @@ header {
     }
   }
 
+  .drop-down{
+    position: relative;
+    display: inline-block;
+    .dropdown-menu{
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background-color: #1a1d29;
+      border: 1px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      min-width: 120px;
+      z-index: 100000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+
+      .dropdown-item{
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        color: #fff;
+        transition: background-color 0.2s ease;
+        border-radius: 8px;
+        &:hover{
+          background-color: #333;
+        }
+      }
+    }
+
+    &:hover .dropdown-menu{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
   .login-btn {
     background-color: transparent;
     border: 1px solid #f9f9f9;
@@ -104,6 +147,13 @@ header {
     border-radius: 50%;
     border: none;
     width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    object-fit: cover;
+    &:hover{
+      opacity: 0.8;
+    }
   }
 }
 
@@ -126,6 +176,7 @@ header {
     }
     .user-photo{
       width: 2.6rem;
+      height: 2.6rem;
     }
   }
 }
@@ -148,10 +199,12 @@ header {
     }
     .user-photo{
       width: 3.5rem;
+      height: 3.5rem;
     }
   }
 }
 
 body {
   padding-top: 7rem;
+  margin: 0;
 }
