@@ -4,18 +4,30 @@
 
    .slider-item{
     outline: none;
+   }
+
     a{
       display: block;
       text-decoration: none;
+      border: 4px;
+      box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    a:hover{
+      padding: 0;
+      border: 4px solid #ffff;
+      transition-duration: 300ms;
     }
     img{
       width: 100%;
+      height: 100%;
       height: 40rem;
       object-fit: cover;
       border-radius: .8rem;
       display: block;
     }
-   }
+
   //  & > button{
   //   opacity: 0;
   //   height: 100%;
