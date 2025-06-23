@@ -49,8 +49,10 @@ video{
 
 @media (max-width: 768px){
   .viewers{
-    .viewers-item{
     grid-template-columns: repeat(1,minmax(0,1fr));
-    }
+
+    // .viewers-item{
+    // grid-template-columns: repeat(1,minmax(0,1fr));
+    // }
   }
 }

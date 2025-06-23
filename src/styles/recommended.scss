@@ -1,0 +1,32 @@
+.recommended{
+  margin-top: 3rem;
+  padding: 3rem 0rem 2.6rem;
+  display: grid;
+  grid-gap: 2.5rem;
+  gap: 2.5rem;grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  .recommended-item{
+    padding-top: 56.25%;
+  border-radius: 1rem;
+ box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+ cursor: pointer;
+ overflow: hidden;
+ transition: all 250ms cubic-bezier(0.25, 0.46,0.45,0.94) 0s;
+ border: 3px solid rgba(249, 249, 249, 0.1);
+ position: relative;
+ img{
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: 500ms ease-in-out 0s;
+  position: absolute;
+  top: 0;
+ }
+
+  }
+   .recommended-item:hover{
+  transform: scale(1.05);
+ box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+ border-color: #ffff;
+ }
+}
