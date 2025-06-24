@@ -1,11 +1,11 @@
-.recommended{
+.newdisney{
   margin-top: 3rem;
   padding: 3rem 0rem 2.6rem;
   display: grid;
   grid-gap: 2.5rem;
   gap: 2.5rem;grid-template-columns: repeat(4, minmax(0, 1fr));
 
-  .recommended-item{
+  .newDisney-item{
     padding-top: 56.25%;
   border-radius: 1rem;
  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
@@ -24,7 +24,7 @@
  }
 
   }
-   .recommended-item:hover{
+   .newDisney-item:hover{
   transform: scale(1.05);
  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
  border-color: #ffff;
@@ -32,7 +32,7 @@
 }
 
 @media (max-width: 768px){
-  .recommended{
+  .newdisney{
     grid-template-columns: repeat(2,minmax(0,1fr));
   }
 }

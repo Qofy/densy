@@ -1,14 +1,21 @@
 import {recommended} from "../data/recommended.ts";
 import "../styles/recommended.scss"
-export function Recommended(){
+
+type recommendedProps={
+  heder: string;
+  data:recommendedData[];
+  sectionClass:string;
+  divClass:string
+}
+export function Recommended({heder="Recommended for you", data= recommended, sectionClass="recommended", divClass="recommended-item"}:recommendedProps){
   return(
     <div>
       <h3>
-        Recommend for you
+        {heder}
       </h3>
-      <section className="recommended">
-      {recommended.map((item)=>(
-        <div className="recommended-item" key={item.id}>
+      <section className={sectionClass}>
+      {data.map((item)=>(
+        <div className={divClass} key={item.id}>
           <img src={item.image} alt={item.alt} />
         </div>
       ))}
