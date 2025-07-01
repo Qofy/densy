@@ -4,6 +4,6 @@ import "../styles/newDisneyplus.scss"
 
 export function NewDisneyPlus(){
   return(
-    <Recommended sectionClass="newdisney" divClass="newDisney-item" heder="New to Disney+" data={newDisney}/>
+    <Recommended sectionClass="newdisney" divClass="newDisney-item" header="New to Disney+" data={newDisney}/>
   )
 }

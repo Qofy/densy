@@ -96,11 +96,11 @@ export default function Header() {
           </nav>
           <div className="drop-down">
           <img className="user-photo" src={userPhoto} alt={username} />
-            <div className="dropdown-menu">
+             <div className="dropdown-menu">
               <button className="dropdown-item" onClick={handleAuth}>
                 Sign out
               </button>
-            </div>
+            </div> 
           </div>
         </>
       )}

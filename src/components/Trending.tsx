@@ -4,6 +4,6 @@ import "../styles/trending.scss"
 
 export function Trending(){
   return(
-    <Recommended sectionClass="trending" divClass="trending-item" heder="Trending" data={newDisney}/>
+    <Recommended sectionClass="trending" divClass="trending-item" header="Trending" data={newDisney}/>
   )
 }
