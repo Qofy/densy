@@ -4,9 +4,12 @@ import { useSelector } from "react-redux";
 import { selectRecommend } from "../features/movie/movieSlice.js";
 
 type RecommendData = {
-  id:number;
+  id:string;
+  cardImg?:string;
+  title?:string;
   image:string;
   alt:string;
+  [key: string]: any; // Allow additional properties
 }
 
 type RecommendedProps={
@@ -29,6 +32,14 @@ export function Recommended({
 
   console.log("Recommended movies from Redux:", moviesFromRedux); // Debug log
 
+  if(!displayData || displayData.length ===0){
+    return(
+      <div className="recommended-container">
+        <h3>{header}</h3>
+        <p>No movies available</p>
+      </div>
+    );
+  }
   return (
     <div className="recommended-container">
       <h3>{header}</h3>
