@@ -1,29 +1,46 @@
-import {recommended} from "../data/recommended.ts";
 import "../styles/recommended.scss"
 import { Link } from "react-router-dom";
-import { UseSelector } from "react-redux";
-import { selectReccommended } from "../features/movie/movieSlice.js";
+import { useSelector } from "react-redux";
+import { selectRecommend } from "../features/movie/movieSlice.js";
 
-type recommendedProps={
-  header: string;
-  data:recommendedData[];
-  sectionClass:string;
-  divClass:string
+type RecommendData = {
+  id:number;
+  image:string;
+  alt:string;
 }
-export function Recommended({header="Recommended for you", data= recommended, sectionClass="recommended", divClass="recommended-item"}:recommendedProps){
-  const movies = UseSelector(selectReccommended);
-  return(
-    <div>
-      <h3>
-        {header}
-      </h3>
+
+type RecommendedProps={
+  header?: string;
+  data?:RecommendData[];
+  sectionClass?:string;
+  divClass?:string
+}
+
+export function Recommended({
+  header = "Recommended for you",
+  data = [],
+  sectionClass = "recommended",
+  divClass = "recommended-item"
+}: RecommendedProps) {
+  const moviesFromRedux = useSelector(selectRecommend);
+  
+  // Use Redux data if available, otherwise use props data
+  const displayData = moviesFromRedux && moviesFromRedux.length > 0 ? moviesFromRedux : data;
+
+  console.log("Recommended movies from Redux:", moviesFromRedux); // Debug log
+
+  return (
+    <div className="recommended-container">
+      <h3>{header}</h3>
       <section className={sectionClass}>
-      {data.map((item)=>(
-        <div className={divClass} key={item.id}>
-          <img src={item.image} alt={item.alt} />
-        </div>
-      ))}
+        {displayData.map((item) => (
+          <div className={divClass} key={item.id}>
+            <Link to={`/detail/${item.id}`}>
+            <img src={item.cardImg || item.image} alt={item.title || item.alt} />
+            </Link>
+          </div>
+        ))}
       </section>
     </div>
-  )
+  );
 }

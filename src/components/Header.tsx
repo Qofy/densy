@@ -6,7 +6,7 @@ import { selectUserEmail, selectUserName, selectUserPhoto, setSignOutState, setU
 import { auth, provider } from "../firebase.js";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
-import { RiDropdownList } from "react-icons/ri";
+// import { RiDropdownList } from "react-icons/ri";
 
 export default function Header() {
   const dispatch = useDispatch();

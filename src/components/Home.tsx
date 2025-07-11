@@ -1,72 +1,78 @@
-import "../styles/home.scss"
-import { ImageSlider } from "../components/ImageSlider.tsx"
-import { Viewers } from "./Viewers.tsx"
-import { Recommended } from "./Recommended.tsx"
-import { recommended } from "../data/recommended.ts"
-import { NewDisneyPlus } from "./NewDisneyPlus.tsx"
-import { Originals } from "./Originals.tsx"
-import { Trending } from "./Trending.tsx"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import db from "../firebase.js"
-import { setMovies } from "../features/movie/movieSlice.js"
-import { selectUserName } from "../features/userSlice.js"
-import { collection, onSnapshot } from "firebase/firestore"
-export function Home (){
-  type MovieData = {
-    id: string;
-    type:string;
-    [key:string]:any;
-  }
-  
+import "../styles/home.scss";
+import { ImageSlider } from "../components/ImageSlider.tsx";
+import { Viewers } from "./Viewers.tsx";
+import { Recommended } from "./Recommended.tsx";
+import { NewDisneyPlus } from "./NewDisneyPlus.tsx";
+import { Originals } from "./Originals.tsx";
+import { Trending } from "./Trending.tsx";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import db from "../firebase.js";
+import { setMovies } from "../features/movie/movieSlice.js";
+import { selectUserName } from "../features/userSlice.js";
+import { collection, onSnapshot } from "firebase/firestore";
+
+type MovieData = {
+  id: string;
+  type: string;
+  [key: string]: any;
+};
+
+export function Home() {
   const dispatch = useDispatch();
   const username = useSelector(selectUserName);
 
-  let recommend: MovieData[] =[]
-  let newDisney: MovieData[] = []
-  let trending: MovieData[]=[]
-  let originals: MovieData[]= []
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "movies"), (snapshot) => {
+      const moviesByType = {
+        recommend: [] as MovieData[],
+        newDisney: [] as MovieData[],
+        trending: [] as MovieData[],
+        original: [] as MovieData[] 
+      };
 
-  useEffect(()=>{
-    const unsubscribe = onSnapshot(collection(db, 'movies'), (snapshot) =>{
-      snapshot.docs.forEach((doc)=>{
-        const movieData = {id: doc.id, ...doc.data()} as MovieData;
-        // console.log("Movie Data: ", movieData);
-        switch(movieData.type){
+      snapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        const movieData: MovieData = { id: doc.id, type: data.type, ...data };
+
+        switch (data.type) {
           case "recommend":
-            recommend.push(movieData);
+            moviesByType.recommend.push(movieData);
             break;
-            case "trending":
-              trending.push(movieData)
-              break;
-              case "newDisney": 
-              newDisney.push(movieData)
-              break;
-              case "original":
-                originals.push(movieData);
-                break;
-                default:
-                  console.log("Unknown movie type: ", movieData.type)
+          case "new":
+            moviesByType.newDisney.push(movieData);
+            break;
+          case "trending":
+            moviesByType.trending.push(movieData);
+            break;
+          case "original":
+            moviesByType.original.push(movieData); 
+            break;
+          default:
+            console.log("Unknown movie type:", data.type);
+            break;
         }
       });
-      dispatch(setMovies({
-        recommend: recommend,
-        newDisney: newDisney,
-        trending: trending,
-        originals: originals
-      }))
-    })
+
+      console.log("Dispatching movies:", moviesByType); // Debug log
+      dispatch(setMovies(moviesByType));
+    });
+
     return () => unsubscribe();
-  }, [dispatch, recommend,trending,originals,newDisney, username])
-  return(
-   <div className="home">
-      {/* <h1>Welcome Home</h1> */}
-      <ImageSlider/>
-      <Viewers/>
-      <Recommended data={recommended} header="Recommended for you" sectionClass="recommended" divClass="recommended-item"/>
-      <NewDisneyPlus/>
-      <Originals/>
-      <Trending/>
+  }, [dispatch]);
+
+  return (
+    <div className="home">
+      <ImageSlider />
+      <Viewers />
+      <Recommended 
+        header="Recommended for you"
+        sectionClass="recommended"
+        divClass="recommended-item"
+      />
+      <NewDisneyPlus />
+      <Originals />
+      <Trending />
     </div>
-  )
+  );
 }
