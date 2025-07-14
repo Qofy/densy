@@ -1,12 +1,37 @@
-import { Recommended } from "../components/Recommended.tsx"
-import "../styles/originals.scss"
 import { selectOriginals } from "../features/movie/movieSlice.js";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import "../styles/originals.scss";
 
-export function Originals(){
-  const ori = useSelector(selectOriginals);
-  console.log("Originals movies from Redux:", ori); // Debug log
-  return(
-    <Recommended sectionClass="originals" divClass="originals-item" header="Originals" data={ori}/>
-  )
+export function Originals() {
+  const movies = useSelector(selectOriginals);
+  
+  console.log("New Disney movies from Redux:", movies);
+
+  if (!movies || movies.length === 0) {
+    return (
+      <div className="newdisney-container">
+        <h3>Originals</h3>
+        <p>No new movies available</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="newdisney-container">
+      <h3>Originals</h3>
+      <section className="newdisney">
+        {movies.map((movie) => (
+          <div className="newDisney-item" key={movie.id}>
+            <Link to={`/detail/${movie.id}`}>
+              <img 
+                src={movie.cardImg || movie.image} 
+                alt={movie.title || "Movie"} 
+              />
+            </Link>
+          </div>
+        ))}
+      </section>
+    </div>
+  );
 }

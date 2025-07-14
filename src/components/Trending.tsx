@@ -1,9 +1,37 @@
-import { Recommended } from "../components/Recommended.tsx"
-import { newDisney } from "../data/newDisney.ts";
-import "../styles/trending.scss"
+import { selectTrending } from "../features/movie/movieSlice.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import "../styles/trending.scss";
 
-export function Trending(){
-  return(
-    <Recommended sectionClass="trending" divClass="trending-item" header="Trending" data={newDisney}/>
-  )
+export function Trending() {
+  const movies = useSelector(selectTrending);
+  
+  console.log("New Disney movies from Redux:", movies);
+
+  if (!movies || movies.length === 0) {
+    return (
+      <div className="newdisney-container">
+        <h3>Trending</h3>
+        <p>No new movies available</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="newdisney-container">
+      <h3>Trending</h3>
+      <section className="newdisney">
+        {movies.map((movie) => (
+          <div className="newDisney-item" key={movie.id}>
+            <Link to={`/detail/${movie.id}`}>
+              <img 
+                src={movie.cardImg || movie.image} 
+                alt={movie.title || "Movie"} 
+              />
+            </Link>
+          </div>
+        ))}
+      </section>
+    </div>
+  );
 }
