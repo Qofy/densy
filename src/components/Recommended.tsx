@@ -1,53 +1,49 @@
 import "../styles/recommended.scss"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectRecommend } from "../features/movie/movieSlice.js";
+import { selectRecommend } from "../features/movie/movieSlice.js"; // ← Changed to selectRecommend
 
-type RecommendData = {
-  id:string;
-  cardImg?:string;
-  title?:string;
-  image:string;
-  alt:string;
-  [key: string]: any; // Allow additional properties
+type RecommendedData = {
+  id: number;
+  image: string;
+  alt: string;
 }
 
-type RecommendedProps={
+type recommendedProps = {
   header?: string;
-  data?:RecommendData[];
-  sectionClass?:string;
-  divClass?:string
+  data?: RecommendedData[];
+  sectionClass?: string;
+  divClass?: string;
 }
 
 export function Recommended({
-  header = "Recommended for you",
-  data = [],
-  sectionClass = "recommended",
+  header = "Recommended for you", 
+  data, 
+  sectionClass = "recommended", 
   divClass = "recommended-item"
-}: RecommendedProps) {
-  const moviesFromRedux = useSelector(selectRecommend);
+}: recommendedProps) {
+  const movies = useSelector(selectRecommend); // ← Changed to selectRecommend
+  console.log("Recommended movies from Redux:", movies);
   
-  // Use Redux data if available, otherwise use props data
-  const displayData = moviesFromRedux && moviesFromRedux.length > 0 ? moviesFromRedux : data;
-
-  console.log("Recommended movies from Redux:", moviesFromRedux); // Debug log
-
-  if(!displayData || displayData.length ===0){
-    return(
-      <div className="recommended-container">
+  const displayData = movies && movies.length > 0 ? movies : data;
+  
+  if (!displayData || displayData.length === 0) {
+    return (
+      <div>
         <h3>{header}</h3>
-        <p>No movies available</p>
+        <p>Loading recommendations...</p>
       </div>
     );
   }
+
   return (
-    <div className="recommended-container">
+    <div>
       <h3>{header}</h3>
       <section className={sectionClass}>
-        {displayData.map((item) => (
+        {displayData.map((item: any) => (
           <div className={divClass} key={item.id}>
             <Link to={`/detail/${item.id}`}>
-            <img src={item.cardImg || item.image} alt={item.title || item.alt} />
+              <img src={item.cardImg || item.image} alt={item.title || item.alt} />
             </Link>
           </div>
         ))}
