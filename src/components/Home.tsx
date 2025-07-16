@@ -6,10 +6,9 @@ import { NewDisneyPlus } from "./NewDisneyPlus.tsx";
 import { Originals } from "./Originals.tsx";
 import { Trending } from "./Trending.tsx";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import db from "../firebase.js";
 import { setMovies } from "../features/movie/movieSlice.js";
-import { selectUserName } from "../features/userSlice.js";
 import { collection, onSnapshot } from "firebase/firestore";
 
 type MovieData = {
@@ -20,43 +19,49 @@ type MovieData = {
 
 export function Home() {
   const dispatch = useDispatch();
-  const username = useSelector(selectUserName);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "movies"), (snapshot) => {
-      const moviesByType = {
-        recommend: [] as MovieData[],
-        newDisney: [] as MovieData[],
-        trending: [] as MovieData[],
-        original: [] as MovieData[] 
-      };
+    const unsubscribe = onSnapshot(
+      collection(db, "movies"), 
+      (snapshot) => {
+        const moviesByType = {
+          recommend: [] as MovieData[],
+          newDisney: [] as MovieData[],
+          trending: [] as MovieData[],
+          original: [] as MovieData[]
+        };
 
-      snapshot.docs.forEach((doc) => {
-        const data = doc.data();
-        const movieData: MovieData = { id: doc.id, type: data.type, ...data };
+        snapshot.docs.forEach((doc) => {
+          const data = doc.data();
+          const movieData: MovieData = { id: doc.id, type: data.type || '', ...data };
 
-        switch (data.type) {
-          case "recommend":
-            moviesByType.recommend.push(movieData);
-            break;
-          case "new":
-            moviesByType.newDisney.push(movieData);
-            break;
-          case "trending":
-            moviesByType.trending.push(movieData);
-            break;
-          case "original":
-            moviesByType.original.push(movieData); 
-            break;
-          default:
-            console.log("Unknown movie type:", data.type);
-            break;
-        }
-      });
+          switch (data.type) {
+            case "recommend":
+              moviesByType.recommend.push(movieData);
+              break;
+            case "new":
+              moviesByType.newDisney.push(movieData);
+              break;
+            case "trending":
+              moviesByType.trending.push(movieData);
+              break;
+            case "original":
+              moviesByType.original.push(movieData);
+              break;
+            default:
+              console.log("Unknown movie type:", data.type);
+              break;
+          }
+        });
 
-      console.log("Dispatching movies:", moviesByType); // Debug log
-      dispatch(setMovies(moviesByType));
-    });
+        console.log("Dispatching movies:", moviesByType);
+        dispatch(setMovies(moviesByType));
+      },
+      (error) => {
+        // Optional: Add error handling
+        console.error("Error fetching movies:", error);
+      }
+    );
 
     return () => unsubscribe();
   }, [dispatch]);
