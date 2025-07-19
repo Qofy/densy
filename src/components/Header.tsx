@@ -25,7 +25,7 @@ export default function Header() {
     });
         
     return () => unSubscribe();
-  }, [dispatch, navigate]);
+  }, []);
 
   const handleAuth = () => {
     if(!username){

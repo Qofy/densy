@@ -1,5 +1,5 @@
 import "../styles/home.scss";
-import { ImageSlider } from "../components/ImageSlider.tsx";
+import { ImageSlider } from "./ImageSlider.tsx";
 import { Viewers } from "./Viewers.tsx";
 import { Recommended } from "./Recommended.tsx";
 import { NewDisneyPlus } from "./NewDisneyPlus.tsx";

@@ -67,7 +67,7 @@ function Details(){
             <CirclePlus color="white" size={66} />
           </div>
           <div className="groupList">
-            <img src="../images/group-icon.png" alt="group" />
+            <img src="/images/group-icon.png" alt="group" />
           </div>
         </div>
         <div className="subTitle">
