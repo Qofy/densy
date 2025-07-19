@@ -5,9 +5,16 @@ import db from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Play, CirclePlus } from "lucide-react";
 
+interface MovieDetails {
+  backgroundImg?: string;
+  titleImg?: string;
+  subTitle?: string;
+  description?: string;
+}
+
 function Details(){
-  const { id } = useParams<{ id: string }>();
-  const [details, setDetails] = useState<any>({});
+  const { id } = useParams() as { id: string };
+  const [details, setDetails] = useState<MovieDetails>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +30,7 @@ function Details(){
         const docSnap = await getDoc(docRef);
         
         if (docSnap.exists()) {
-          setDetails(docSnap.data());
+          setDetails(docSnap.data() as MovieDetails);
         } else {
           console.log("No such document in firebase 🔥!");
         }

@@ -1,5 +1,6 @@
 import "../styles/home.scss";
-import { ImageSlider } from "./ImageSlider.tsx";
+import {ImageSlider} from './ImageSlider.tsx';
+
 import { Viewers } from "./Viewers.tsx";
 import { Recommended } from "./Recommended.tsx";
 import { NewDisneyPlus } from "./NewDisneyPlus.tsx";
@@ -17,7 +18,7 @@ type MovieData = {
   [key: string]: any;
 };
 
-export function Home() {
+function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,3 +82,5 @@ export function Home() {
     </div>
   );
 }
+
+export default Home;

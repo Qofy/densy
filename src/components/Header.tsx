@@ -8,7 +8,7 @@ import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 // import { RiDropdownList } from "react-icons/ri";
 
-export default function Header() {
+ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
    
@@ -107,3 +107,4 @@ export default function Header() {
     </header>
   );
 }
+export default Header;

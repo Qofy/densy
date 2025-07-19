@@ -1,5 +1,4 @@
-import { RiMovie2Line } from "react-icons/ri";
-import {Search, Home, Plus, Star} from "lucide-react"
+import {Search, Home, Plus, Star, Film} from "lucide-react"
 export const headerNav = [
 
   {
@@ -24,6 +23,6 @@ export const headerNav = [
   },
   {
     id: 5,
-    icon: RiMovie2Line,
+    icon: Film,
     txt: "MOVIES"
   },]
