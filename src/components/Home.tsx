@@ -1,11 +1,10 @@
 import "../styles/home.scss";
-import {ImageSlider} from './ImageSlider.tsx';
-
-import { Viewers } from "./Viewers.tsx";
-import { Recommended } from "./Recommended.tsx";
-import { NewDisneyPlus } from "./NewDisneyPlus.tsx";
-import { Originals } from "./Originals.tsx";
-import { Trending } from "./Trending.tsx";
+import { ImageSlider } from './ImageSlider';
+import { Viewers } from "./Viewers";
+import { Recommended } from "./Recommended";
+import { NewDisneyPlus } from "./NewDisneyPlus";
+import { Originals } from "./Originals";
+import { Trending } from "./Trending";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import db from "../firebase.js";
