@@ -21,15 +21,17 @@ export function Originals() {
     <div className="newdisney-container">
       <h3>Originals</h3>
       <section className="newdisney">
-        {movies.map((movie) => (
-          <div className="newDisney-item" key={movie.id}>
-            <Link to={`/detail/${movie.id}`}>
-              <img 
-                src={movie.cardImg || movie.image} 
-                alt={movie.title || "Movie"} 
-              />
-            </Link>
-          </div>
+        {Array.isArray(movies) && movies.map((movie) => (
+          movie && movie.id ? (
+            <div className="newDisney-item" key={movie.id}>
+              <Link to={`/detail/${movie.id}`}>
+                <img 
+                  src={movie.cardImg || movie.image} 
+                  alt={movie.title || "Movie"} 
+                />
+              </Link>
+            </div>
+          ) : null
         ))}
       </section>
     </div>

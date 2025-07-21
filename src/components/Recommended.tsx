@@ -40,12 +40,14 @@ export function Recommended({
     <div>
       <h3>{header}</h3>
       <section className={sectionClass}>
-        {displayData.map((item: any) => (
-          <div className={divClass} key={item.id}>
-            <Link to={`/detail/${item.id}`}>
-              <img src={item.cardImg || item.image} alt={item.title || item.alt} />
-            </Link>
-          </div>
+        {Array.isArray(displayData) && displayData.map((item: any) => (
+          item && item.id ? (
+            <div className={divClass} key={item.id}>
+              <Link to={`/detail/${item.id}`}>
+                <img src={item.cardImg || item.image} alt={item.title || item.alt} />
+              </Link>
+            </div>
+          ) : null
         ))}
       </section>
     </div>
